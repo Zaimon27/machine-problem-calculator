@@ -1,7 +1,11 @@
 const display = document.getElementById('display');
 
 function appendValue(value) {
-  display.value += value;
+  if (value === '*') {
+    display.value += '×';  // Display the times symbol
+  } else {
+    display.value += value;
+  }
 }
 
 function clearDisplay() {
@@ -14,7 +18,8 @@ function deleteLast() {
 
 function calculate() {
   try {
-    display.value = eval(display.value);
+    const expression = display.value.replace(/×/g, '*');  // Use * for calculation
+    display.value = eval(expression);
   } catch {
     display.value = 'Error';
   }
